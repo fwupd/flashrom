@@ -18,6 +18,7 @@ warning_flags = [
   '-Wno-address-of-packed-member',
   '-Wno-enum-conversion',
   '-Wno-missing-field-initializers',
+  '-Wno-missing-braces',
 ]
 
 conf = configuration_data()
@@ -25,6 +26,7 @@ conf = configuration_data()
 cc = meson.get_compiler('c')
 add_project_arguments(cc.get_supported_arguments(warning_flags), language : 'c')
 add_project_arguments('-D_DEFAULT_SOURCE', language : 'c')
+add_project_arguments('-D_BSD_SOURCE', language : 'c') # required for glibc < v2.19
 add_project_arguments('-DFLASHROM_VERSION="' + meson.project_version() + '"', language : 'c')
 
 # get defaults from configure
